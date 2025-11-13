@@ -25,12 +25,25 @@ const updateTareas = asynchandler( async (req,res) => {
         res.status(404)
         throw new Error ("Tarea no existe")
     }
+    else{
+        const tareaUpdated = await Tarea.findByIdAndUpdate(req.params, req.body, {new:true})
+        res.status(200).json(tareaUpdated)
+    }
     const tareaUpdated = await Tarea.findByIdAndUpdate(req.params.id, req.body, {new:true})
     res.status(200).json(tareaUpdated )
+    
 })
 
 const deleteTareas = asynchandler( async (req,res) => {
-    res.status(200).json({"mensaje":"getTareas"})
+
+    if(tarea.user.toString() !== req.user.id ){
+        res.status(401)
+        throw new Error ("Usuario no autorizado")
+    }
+    else{
+        await tarea.deleteOne()
+        res.status(200).json({id: req.params.id})
+    }
 })
 
 module.exports = {
