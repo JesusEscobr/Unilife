@@ -30,4 +30,4 @@ if (token ){
 }
 }
 
-module.exports ={protects}
+module.exports ={protect}
