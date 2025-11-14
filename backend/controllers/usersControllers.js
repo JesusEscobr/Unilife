@@ -71,7 +71,7 @@ const generarToken = (id) => {
 }
 
 const data = (req, res) => {
-    res.status(200).json ({mensaje: "data"})
+    res.status(200).json (req.user)
 }
 module.exports ={
     login,register,data
