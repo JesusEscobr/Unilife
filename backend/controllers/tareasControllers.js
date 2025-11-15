@@ -19,7 +19,7 @@ const createTareas = asynchandler( async(req,res) => {
     res.status(201).json(tarea)
 })
 
-const updateTareas = asyncHandler (async (req, res) => {
+const updateTareas = asynchandler (async (req, res) => {
     const tarea = await Tarea.findById(req.params.id)
     if (!tarea){
         res.status(404)
