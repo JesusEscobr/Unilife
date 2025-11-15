@@ -64,17 +64,18 @@ const register = asyncHandler(async (req, res) => {
 
 })
 
-const generarToken = (id) => {
-    return jwt.sign({id}, process.env.JWT_SECRET, {
-        expiresIn: '3d'
-    })
-}
 
 const data = (req, res) => {
     res.status(200).json (req.user)
 }
+
+const generarToken = (id) => {
+    return jwt.sign({id}, process.env.JWT_SECRET, {
+        expiresIn: '30d'
+    })
+}
 module.exports ={
-    login,register,data
+    login, register, data
 }
 
 
