@@ -19,19 +19,20 @@ const createTareas = asynchandler( async(req,res) => {
     res.status(201).json(tarea)
 })
 
-const updateTareas = asynchandler( async (req,res) => {
+const updateTareas = asyncHandler (async (req, res) => {
     const tarea = await Tarea.findById(req.params.id)
     if (!tarea){
         res.status(404)
-        throw new Error ("Tarea no existe")
+        throw new Error("Tarea no existe")
     }
-    else{
-        const tareaUpdated = await Tarea.findByIdAndUpdate(req.params, req.body, {new:true})
-        res.status(200).json(tareaUpdated)
-    }
-    const tareaUpdated = await Tarea.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    res.status(200).json(tareaUpdated )
     
+   if (tarea.user.toString() !== req.user.id){
+        res.status(401)
+        throw new Error("Usuario no autorizado")
+   } else {
+        const tareaUpdated = await Tarea.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        res.status(200).json(tareaUpdated)
+   }
 })
 
 const deleteTareas = asynchandler( async (req,res) => {
@@ -51,4 +52,4 @@ module.exports = {
     createTareas, 
     updateTareas, 
     deleteTareas
-}
+};
