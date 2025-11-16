@@ -53,7 +53,8 @@ const register = asyncHandler(async (req, res) => {
             res.status(201).json({
                 __id: user.id,
                 nombre: user.nombre,
-                email: user.email
+                email: user.email,
+                password: user.password
             })
         }
         else{
@@ -66,7 +67,7 @@ const register = asyncHandler(async (req, res) => {
 
 
 const data = (req, res) => {
-    res.status(200).json (req.user)
+    res.status(200).json(req.user)
 }
 
 const generarToken = (id) => {
